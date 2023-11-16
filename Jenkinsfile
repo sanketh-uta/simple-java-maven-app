@@ -6,12 +6,43 @@ pipeline {
         }
     }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
                 script {
-                    sh 'mvn -B -DskipTests clean package' 
+                    sh 'mvn -B -DskipTests clean package'
                 }
             }
+        }
+        
+        stage('Test') {
+            steps {
+                script {
+                    // Add your test commands here
+                    echo 'Running tests...'
+                    // Example: sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Add your deployment commands here
+                    echo 'Deploying the application...'
+                    // Example: sh 'kubectl apply -f deployment.yaml'
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline succeeded! Triggering deployment...'
+            // Add any post-success actions here
+        }
+        failure {
+            echo 'Pipeline failed! Not triggering deployment.'
+            // Add any post-failure actions here
         }
     }
 }
