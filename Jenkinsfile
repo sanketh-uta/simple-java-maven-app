@@ -16,23 +16,24 @@ pipeline {
         
         stage('Test') {
             steps {
-                script {
-                    // Add your test commands here
-                    echo 'Running tests...'
-                    // Example: sh 'mvn test'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    // Add your deployment commands here
-                    echo 'Deploying the application...'
-                    // Example: sh 'kubectl apply -f deployment.yaml'
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         script {
+        //             // Add your deployment commands here
+        //             echo 'Deploying the application...'
+        //             // Example: sh 'kubectl apply -f deployment.yaml'
+        //         }
+        //     }
+        // }
     }
     
     post {
