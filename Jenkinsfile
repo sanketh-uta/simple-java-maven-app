@@ -25,15 +25,11 @@ pipeline {
             }
         }
 
-        // stage('Deploy') {
-        //     steps {
-        //         script {
-        //             // Add your deployment commands here
-        //             echo 'Deploying the application...'
-        //             // Example: sh 'kubectl apply -f deployment.yaml'
-        //         }
-        //     }
-        // }
+      stage('Deliver') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+            }
+        }
     }
     
     post {
