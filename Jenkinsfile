@@ -5,6 +5,9 @@ pipeline {
             args '-v /root/.m2:/root/.m2' 
         }
     }
+    environment {
+        GCP_CREDENTIALS = credentials('b117fa26-8670-4dc8-8b35-a17741d62532')
+    }
     stages {
         stage('Build') {
             steps {
