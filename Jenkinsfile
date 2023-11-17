@@ -32,7 +32,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'creds-gcloud', variable: 'GCP_CREDENTIALS_FILE')]) {
                         sh "gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_FILE}"
                     }
-                    ./jenkins/scripts/deliver.sh
+                    
                 }
             }
         }
