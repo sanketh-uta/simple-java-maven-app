@@ -7,7 +7,7 @@ pipeline {
     }
     
     environment {
-        GCP_CREDENTIALS = credentials('b117fa26-8670-4dc8-8b35-a17741d62532')
+        GCP_CREDENTIALS = credentials('jenkins-demo')
     }
 
     stages {
@@ -33,7 +33,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'b117fa26-8670-4dc8-8b35-a17741d62532', variable: 'GCP_CREDENTIALS_FILE')]) {
+                    withCredentials([file(credentialsId: 'jenkins-demo', variable: 'GCP_CREDENTIALS_FILE')]) {
                         sh '''
                             gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_FILE}
                             gcloud config set project jenkins-demo-405221
