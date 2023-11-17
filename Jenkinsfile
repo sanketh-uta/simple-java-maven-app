@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        GCP_CREDENTIALS = credentials('e2801dd0-e8f9-4fd9-878b-3c4735e89649')
+        GCP_CREDENTIALS = credentials('creds-gcloud')
     }
 
     stages {
@@ -28,7 +28,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'e2801dd0-e8f9-4fd9-878b-3c4735e89649', variable: 'GCP_CREDENTIALS_FILE')]) {
+                    withCredentials([file(credentialsId: 'creds-gcloud', variable: 'GCP_CREDENTIALS_FILE')]) {
                         sh "gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_FILE}"
                     }
                     ./jenkins/scripts/deliver.sh
