@@ -1,13 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'ubuntu:20.04' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent any
     
     environment {
-        GCP_CREDENTIALS = credentials('b117fa26-8670-4dc8-8b35-a17741d62532')
+        GCP_CREDENTIALS = credentials('e2801dd0-e8f9-4fd9-878b-3c4735e89649')
     }
 
     stages {
@@ -33,14 +28,10 @@ pipeline {
         stage('Deliver') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'b117fa26-8670-4dc8-8b35-a17741d62532', variable: 'GCP_CREDENTIALS_FILE')]) {
-                        sh '''
-                            gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_FILE}
-                            gcloud config set project jenkins-demo-405221
-                            # Additional GCP commands for deployment
-                            ./jenkins/scripts/deliver.sh
-                        '''
+                    withCredentials([file(credentialsId: 'e2801dd0-e8f9-4fd9-878b-3c4735e89649', variable: 'GCP_CREDENTIALS_FILE')]) {
+                        sh "gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_FILE}"
                     }
+                    ./jenkins/scripts/deliver.sh
                 }
             }
         }
