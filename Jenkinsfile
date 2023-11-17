@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.5-eclipse-temurin-17-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent any
     
     environment {
         GCP_CREDENTIALS = credentials('b117fa26-8670-4dc8-8b35-a17741d62532')
