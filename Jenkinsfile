@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+     tools {
+        maven 'maven'
+    }
     environment {
         GCP_CREDENTIALS = credentials('creds-gcloud')
     }
@@ -9,6 +11,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    def mavenHome = tool 'maven'
+                    env.PATH = "${mavenHome}/bin:${env.PATH}"
+
+                    // Run Maven build
                     sh 'mvn -B -DskipTests clean package'
                 }
             }
@@ -17,11 +23,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
             }
         }
 
