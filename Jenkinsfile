@@ -4,7 +4,8 @@ pipeline {
     }
 
     environment {
-        GCP_CREDENTIALS=credentials('creds-gcloud') GCP_PROJECT='jenkins-demo-405221'
+        GCP_CREDENTIALS=credentials('creds-gcloud') 
+        GCP_PROJECT='jenkins-demo-405221'
         GCE_INSTANCE_NAME='jenkins-instance1'
         GCP_ZONE='us-central1-a'
         STORAGE_BUCKET='jenkins-bucket-demo'
