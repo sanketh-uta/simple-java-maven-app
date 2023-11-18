@@ -8,7 +8,7 @@ pipeline {
         GCP_CREDENTIALS=credentials('creds-gcloud') 
         GCP_PROJECT='jenkins-demo-405221'
         GCE_INSTANCE_NAME='jenkins-instance1'
-        GCP_ZONE='us-central1-a'
+        GCP_ZONE='us-west4-b'
         STORAGE_BUCKET='jenkins-bucket-demo'
     }
 
