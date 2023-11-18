@@ -1,5 +1,6 @@
 pipeline {
-    agent any tools {
+    agent any 
+    tools {
         maven 'maven'
     }
 
@@ -38,15 +39,6 @@ pipeline {
                     }
 
                     sh "gsutil cp -r target gs://${STORAGE_BUCKET}/"
-                }
-            }
-        }
-
-        stage('Download from Google Cloud Storage') {
-            steps {
-                script {
-                    // Download the JAR file from Google Cloud Storage to the workspace
-                    sh "gsutil cp gs://${STORAGE_BUCKET}/target/my-app-1.0-SNAPSHOT.jar ./"
                 }
             }
         }
